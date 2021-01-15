@@ -25,7 +25,6 @@ import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
@@ -34,7 +33,7 @@ import java.util.ArrayList;
 public class MapsActivity extends Activity {
 
     private MapView                 map;
-    private TextView                textView;
+    private TextView                textView, tvInfo, tvTitle;
     private IMapController          mapController;
     private MyLocationNewOverlay    myLocationNewOverlay;
     private final int               REQUEST_PERMISSIONS_REQUEST_CODE = 1;
@@ -55,6 +54,9 @@ public class MapsActivity extends Activity {
         setContentView(R.layout.activity_maps);
 
         btnMyLocation = (Button) findViewById(R.id.btnMyLocation);
+        textView = findViewById(R.id.searchbox);
+        tvTitle = findViewById(R.id.tv_title);
+        tvInfo = findViewById(R.id.tv_info);
         gpsTracker = new GpsTracker(ctx);
 
         map = (MapView) findViewById(R.id.map);
@@ -69,6 +71,21 @@ public class MapsActivity extends Activity {
         myLocationNewOverlay.enableMyLocation();
         myLocationNewOverlay.enableFollowLocation();
         map.getOverlays().add(myLocationNewOverlay);
+
+//        Handler handler= new Handler();
+//        Runnable runnableCode = new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    textView.setText(gpsTracker.getLocation().toString());
+////                  Log.e("MAP", vrsCurrentLatitude+" "+vrsCurrentLongitude);
+//                    handler.postDelayed(this, 1000);
+//                }catch (Exception e) {
+//                    textView.setText(e.getMessage());
+//                }
+//            }
+//        };
+//        handler.post(runnableCode);
 
         btnMyLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +109,8 @@ public class MapsActivity extends Activity {
         final MapEventsReceiver mReceive = new MapEventsReceiver(){
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                map.getOverlay().clear();
+                map.getOverlays().remove(marker);
+                map.invalidate();
                 return false;
             }
             @Override
@@ -103,7 +121,9 @@ public class MapsActivity extends Activity {
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
                 marker.setSnippet("Lat/Lng: " + p);
                 map.getOverlays().add(marker);
-                marker.showInfoWindow();
+                tvTitle.setText(marker.getTitle() + " " + marker.getSnippet());
+                tvInfo.setText(marker.getSnippet());
+                map.invalidate();
                 return false;
             }
         };

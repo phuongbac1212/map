@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:endColor="@color/teal_200"
+                android:centerColor="#34D5EA"
+                android:startColor="#4CAF50" />
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" tools:ignore="StateListReachable" />
+            <size
+                android:width="162dp"
+                android:height="50dp" />
+        </shape>
+    </item>
+<!--    <item tools:ignore="StateListReachable">-->
+<!--        <shape android:shape="rectangle">-->
+<!--            <solid android:color="#FFFFFF" />-->
+<!--            <corners android:radius="10dp" />-->
+<!--&lt;!&ndash;            <size&ndash;&gt;-->
+<!--&lt;!&ndash;                android:width="40dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:height="40dp" />&ndash;&gt;-->
+<!--        </shape>-->
+<!--    </item>-->
+</selector>

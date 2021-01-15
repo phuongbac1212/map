@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@layout/activity_maps_destination"
+        app:constraintSetStart="@layout/activity_maps_start">
+        <OnSwipe app:touchAnchorSide="top"
+            app:dragDirection="dragUp" />
+    </Transition>
+
+<!--    <Transition-->
+<!--        app:constraintSetEnd="@layout/activity_maps_start"-->
+<!--        app:constraintSetStart="@layout/activity_maps_destination">-->
+<!--        <OnSwipe app:touchAnchorSide="top"-->
+<!--            app:dragDirection="dragDown" />-->
+<!--    </Transition>-->
+</MotionScene>
